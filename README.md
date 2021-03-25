@@ -3,11 +3,12 @@
 ## Bug description
 
 When using the `Flux<S> saveAll(Publisher<S> entityStream)` method from
-the `ReactiveCrudRepository` class, the returned entities do not have their id property
+the `SimpleReactiveMongoRepository` class, the returned entities do not have their id property
 populated, in the case where the field annotated with `@Id` class is immutable.
 
 The bug only affects the version of `saveAll` that accepts a `Publisher`.
-The version of `saveAll` that accepts an `Iterable` is not affected by this bug.
+The version of `saveAll` that accepts an `Iterable` is not affected by this bug,
+neither is the version of `insert` that accepts a `Publisher`.
 
 The bug was reproduced in the following Spring Boot / Spring data versions:
 - spring-boot-starter-parent `2.4.4`, spring-data-mongodb `3.1.6`, spring-data-commons `2.4.6`

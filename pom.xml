@@ -12,7 +12,7 @@
 	<artifactId>spring-data-mongodb-sample-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-data-mongodb-sample</name>
-	<description>Sample Spring Boot Data Mongodb project to reproduce a bug in ReactiveCrudRepository#saveAll</description>
+	<description>Sample Spring Boot Data Mongodb project to reproduce a bug in SimpleReactiveMongoRepository#saveAll</description>
 	<properties>
 		<java.version>11</java.version>
 		<testcontainers.version>1.15.2</testcontainers.version>

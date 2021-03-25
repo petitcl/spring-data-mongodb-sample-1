@@ -63,7 +63,6 @@ public class MutableEntityTest {
 		assertEntityIsCorrectlyDeserialized(entities.get(0));
 	}
 
-	// this test fails because entities.get(0).getId() is null
 	@Test
 	public void test_saveAllFlux_deserializesWellEntity() throws Exception {
 		MutableTestEntity entity = makeEntity();
@@ -81,6 +80,31 @@ public class MutableEntityTest {
 	public void test_saveAllIterable_deserializesWellEntity() throws Exception {
 		MutableTestEntity entity = makeEntity();
 		final List<MutableTestEntity> entities = repository.saveAll(Collections.singletonList(entity))
+			.collectList()
+			.block();
+
+		Assertions.assertNotNull(entities);
+		Assertions.assertEquals(1, entities.size());
+		assertEntityIsCorrectlyDeserialized(entities.get(0));
+	}
+
+	@Test
+	public void test_insertFlux_deserializesWellEntity() throws Exception {
+		MutableTestEntity entity = makeEntity();
+		final Flux<MutableTestEntity> flux = Flux.just(entity);
+		final List<MutableTestEntity> entities = repository.insert(flux)
+			.collectList()
+			.block();
+
+		Assertions.assertNotNull(entities);
+		Assertions.assertEquals(1, entities.size());
+		assertEntityIsCorrectlyDeserialized(entities.get(0));
+	}
+
+	@Test
+	public void test_insertIterable_deserializesWellEntity() throws Exception {
+		MutableTestEntity entity = makeEntity();
+		final List<MutableTestEntity> entities = repository.insert(Collections.singletonList(entity))
 			.collectList()
 			.block();
 

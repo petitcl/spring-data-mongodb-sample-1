@@ -89,6 +89,31 @@ public class ImmutableEntityTest {
 		assertEntityIsCorrectlyDeserialized(entities.get(0));
 	}
 
+	@Test
+	public void test_insertFlux_deserializesWellEntity() throws Exception {
+		ImmutableTestEntity entity = makeEntity();
+		final Flux<ImmutableTestEntity> flux = Flux.just(entity);
+		final List<ImmutableTestEntity> entities = repository.insert(flux)
+			.collectList()
+			.block();
+
+		Assertions.assertNotNull(entities);
+		Assertions.assertEquals(1, entities.size());
+		assertEntityIsCorrectlyDeserialized(entities.get(0));
+	}
+
+	@Test
+	public void test_insertIterable_deserializesWellEntity() throws Exception {
+		ImmutableTestEntity entity = makeEntity();
+		final List<ImmutableTestEntity> entities = repository.insert(Collections.singletonList(entity))
+			.collectList()
+			.block();
+
+		Assertions.assertNotNull(entities);
+		Assertions.assertEquals(1, entities.size());
+		assertEntityIsCorrectlyDeserialized(entities.get(0));
+	}
+
 	private ImmutableTestEntity makeEntity() {
 		return ImmutableTestEntity.builder()
 			.test("test")
