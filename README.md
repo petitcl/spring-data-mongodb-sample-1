@@ -19,3 +19,9 @@ The bug was reproduced in the following Spring Boot / Spring data versions:
 2. Run the unit tests  with `mvn test`
 3. See that the `ImmutableEntityTest#test_saveAllFlux_deserializesWellEntity` test fails although it shouldn't
 4. See that all the other unit tests are passing
+
+
+## History
+An issue was created for this bug in the spring-data-mongodb github repository: [#3609](https://github.com/spring-projects/spring-data-mongodb/issues/3609).
+
+The bug was then fixed via [#3611](https://github.com/spring-projects/spring-data-mongodb/pull/3611).
